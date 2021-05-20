@@ -38,22 +38,22 @@ body, .container{
   bottom: 0;
   left: 0;
 }
-@media screen and (min-width: 60em) {
+@media screen and (min-width: 640px) {
   .container {
-    left:5.55555%;
-    right: 5.55555%
+    left:5%;
+    right: 5%
   }
 }
 
-@media screen and (min-width: 80em) {
+@media screen and (min-width: 1200px) {
   .container {
-    left:11.1111%;
-    right: 11.1111%
+    left:10%;
+    right: 10%
   }
 }
 body{
-  background-color: #f9957f;
-  background-image: linear-gradient(180deg, #f9957f,#f2f5d0);
+  background-color: #315481;
+  background-image: linear-gradient(#315481,#918e82);
   background-repeat: no-repeat;
   background-attachment: fixed;
 }
@@ -66,15 +66,16 @@ body{
   width: 270px;
   height: auto;
   overflow-y: auto;
-  background-color: #f9957f;
-  background-image: linear-gradient(180deg, #f9957f,#f2f5d0);
+  background-color: #315481;
+  background-image: linear-gradient(#315481,#918e82);
   background-repeat: no-repeat;
   background-attachment: fixed;
 }
 .list{
   height: 40px;
   line-height: 40px;
-  border-bottom: 1px solid #2c3e50;
+  box-shadow: 0 1px 0 0 hsl(0deg 0% 100% / 15%);
+  color: hsla(0,0%,100%,.4);
 }
 .content{
   position: absolute;
@@ -86,7 +87,7 @@ body{
   height: auto;
   background: #fff;
 }
-@media screen and (min-width: 40em) {
+@media screen and (min-width: 500px) {
   .content {
     left:270px
   }
