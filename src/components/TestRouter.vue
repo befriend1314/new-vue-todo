@@ -1,18 +1,17 @@
 <template>
-  <div class="content">
-    <top-tool />
-    <todo-item />
-  </div>
+  <div class="content">{{iid}}</div>
 </template>
 
 <script>
-import TopTool from './TopTool'
-import TodoItem from './TodoItem'
 export default {
-  name: 'MainComp',
-  components: {
-    TopTool,
-    TodoItem
+  name: 'TestRouter',
+  data () {
+    return {
+      iid: ''
+    }
+  },
+  created () {
+    this.iid = this.$route.params.id
   }
 }
 </script>

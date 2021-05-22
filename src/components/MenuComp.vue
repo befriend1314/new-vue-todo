@@ -1,22 +1,46 @@
 <template>
   <div class="menu">
-    <div class="listBox">
-      <a href="#" class="list">
+    <div class="listBox" v-if="Object.keys(todoList).length !== 0">
+      <a href="#" class="list" v-for="(list, index) in todoList" :key="index">
         <i class="icon iconfont icon-lock"></i>
-        <span class="title">Angle</span>
-        <span class="numBox">2</span>
+        <span class="title">{{ list.title }}</span>
+        <span class="numBox">{{ list.count }}</span>
       </a>
     </div>
-    <a href="#" class="addBtn">
+    <div class="addBtn" @click="addNewList">
       <i class="icon iconfont icon-plus"></i>
       <span class="title">新增</span>
-    </a>
+    </div>
   </div>
 </template>
 
 <script>
+import { getTodoList } from '../network/api'
+
 export default {
-  name: 'MenuComp'
+  name: 'MenuComp',
+  computed: {
+    todoList () {
+      return this.$store.state.todoList
+    }
+  },
+  mounted () {
+    getTodoList().then(res => {
+      this.$store.dispatch('getTodoList', res.data)
+    })
+  },
+  methods: {
+    addNewList () {
+      console.log('1')
+      const newList = {
+        title: 'lala',
+        isLock: false,
+        item: []
+      }
+      this.$store.commit('addNewList', newList)
+      this.$router.push({ path: '/123123' })
+    }
+  }
 }
 </script>
 
@@ -35,7 +59,7 @@ export default {
   background-repeat: no-repeat;
   background-attachment: fixed;
 }
-.menu a{
+.menu a, .addBtn{
   display: block;
   position: relative;
   padding: 0 20px;
@@ -52,7 +76,7 @@ export default {
 .list:hover{
   color: #fff;
 }
-.menu a .title{
+.menu a .title, .addBtn .title{
   margin-left: 15px;
 }
 .list .numBox{
@@ -65,6 +89,7 @@ export default {
   color: #fff;
 }
 .addBtn{
+  cursor: pointer;
   color: #5db9ff;
 }
 </style>

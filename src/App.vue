@@ -2,19 +2,17 @@
   <div id="app">
     <div class="container">
       <menu-comp />
-      <main-comp />
+      <router-view></router-view>
     </div>
   </div>
 </template>
 
 <script>
 import MenuComp from './components/MenuComp'
-import MainComp from './components/MainComp'
 export default {
   name: 'App',
   components: {
-    MenuComp,
-    MainComp
+    MenuComp
   }
 }
 </script>

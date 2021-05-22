@@ -1,8 +1,10 @@
-div,ul,li,a,span,img{
+div,ul,li,a,span,input,img,i{
     margin: 0;
     padding: 0;
 }
-
+li{
+    list-style: none;
+}
 body, .container{
     position: absolute;
     top: 0;
