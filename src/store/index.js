@@ -1,24 +1,26 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import * as actions from './actions'
 
 Vue.use(Vuex)
 
 const store = new Vuex.Store({
   state: {
     todoList: [],
-    lists: []
+    menuOpen: false
   },
-  actions: {
-    getTodoList (context, payload) {
-      context.commit('getTodoList', payload)
+  getters: {
+    getTodoList: state => {
+      return state.todoList
     }
   },
+  actions: actions,
   mutations: {
-    addNewList: (state, payload) => {
-      state.lists.push(payload)
+    EDITTODE: (state, data) => {
+      state.todoList = data
     },
-    getTodoList: (state, payload) => {
-      state.todoList = payload.todos
+    MENUOPEN: (state) => {
+      state.menuOpen = !state.menuOpen
     }
   }
 

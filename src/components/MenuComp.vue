@@ -1,13 +1,13 @@
 <template>
   <div class="menu">
     <div class="listBox" v-if="Object.keys(todoList).length !== 0">
-      <a href="#" class="list" v-for="(list, index) in todoList" :key="index">
+      <a @click="goList(list.id)" class="list" v-for="(list, index) in todoList" :key="index">
         <i class="icon iconfont icon-lock"></i>
         <span class="title">{{ list.title }}</span>
         <span class="numBox">{{ list.count }}</span>
       </a>
     </div>
-    <div class="addBtn" @click="addNewList">
+    <div class="addBtn" @click="addTodoList">
       <i class="icon iconfont icon-plus"></i>
       <span class="title">新增</span>
     </div>
@@ -15,30 +15,53 @@
 </template>
 
 <script>
-import { getTodoList } from '../network/api'
+import { addTodo } from '../network/api'
 
 export default {
-  name: 'MenuComp',
-  computed: {
-    todoList () {
-      return this.$store.state.todoList
+  data () {
+    return {
+      items: [],
+      todoId: '',
+      todoNum: 0
     }
   },
-  mounted () {
-    getTodoList().then(res => {
-      this.$store.dispatch('getTodoList', res.data)
+  watch: {
+    'todoId' (id) {
+      this.$router.push({ name: 'todo', params: { id: id } })
+    }
+  },
+  computed: {
+    todoList () {
+      const number = this.$store.getters.getTodoList.length
+      if (this.$store.getters.getTodoList.length < this.todoNum) {
+        this.goList(this.$store.getters.getTodoList[0].id)
+      }
+      // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+      this.todoNum = number
+      return this.$store.getters.getTodoList
+    }
+  },
+  created () {
+    this.$store.dispatch('getTodo').then(() => {
+      this.$nextTick(() => {
+        this.goList(this.todoList[0].id)
+      })
     })
   },
   methods: {
-    addNewList () {
-      console.log('1')
-      const newList = {
-        title: 'lala',
-        isLock: false,
-        item: []
-      }
-      this.$store.commit('addNewList', newList)
-      this.$router.push({ path: '/123123' })
+    goList (id) {
+      this.todoId = id
+    },
+    addTodoList () {
+      addTodo({}).then(data => {
+        this.$store.dispatch('getTodo').then(() => {
+          this.$nextTick(() => {
+            setTimeout(() => {
+              this.goList(this.todoList[this.todoList.length - 1].id)
+            }, 100)
+          })
+        })
+      })
     }
   }
 }

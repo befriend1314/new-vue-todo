@@ -3,15 +3,13 @@
 </template>
 
 <script>
+
 export default {
   name: 'TestRouter',
   data () {
     return {
       iid: ''
     }
-  },
-  created () {
-    this.iid = this.$route.params.id
   }
 }
 </script>
