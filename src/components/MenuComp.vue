@@ -1,7 +1,7 @@
 <template>
   <div class="menu">
     <div class="listBox" v-if="Object.keys(todoList).length !== 0">
-      <a @click="goList(list.id)" class="list" v-for="(list, index) in todoList" :key="index">
+      <a @click="goList(list.id)" class="list" :class="{'checked':list.id === todoId }" v-for="(list, index) in todoList" :key="index">
         <i class="icon iconfont icon-lock"></i>
         <span class="title">{{ list.title }}</span>
         <span class="numBox">{{ list.count }}</span>
@@ -96,7 +96,7 @@ export default {
 .list{
   color: hsla(0,0%,100%,.4);
 }
-.list:hover{
+.list:hover, .list.checked{
   color: #fff;
 }
 .menu a .title, .addBtn .title{
@@ -107,7 +107,7 @@ export default {
   right: 20px;
   top: 14px;
 }
-.list:hover .numBox{
+.list.checked .numBox, .list:hover .numBox{
   background: #2cc5d2;
   color: #fff;
 }

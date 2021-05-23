@@ -3,13 +3,13 @@ import VueRouter from 'vue-router'
 
 Vue.use(VueRouter)
 
-const TestRouter = () => import('../components/TestRouter')
+const MainComp = () => import('../components/MainComp')
 
 const routes = [
   {
     path: '/todo/:id',
     name: 'todo',
-    component: TestRouter
+    component: MainComp
   }
 ]
 

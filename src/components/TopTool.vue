@@ -1,8 +1,8 @@
 <template>
   <div class="topTool">
     <div class="titleName">
-      <span>Angela</span>
-      <span class="numBox">1</span>
+      <span>{{ todo.title }}</span>
+      <span class="numBox">{{ todo.count }}</span>
     </div>
     <div class="inputBox">
       <i class="icon iconfont icon-add iconAdd"></i>
@@ -15,7 +15,13 @@
 
 <script>
 export default {
-  name: 'TopTool'
+  name: 'TopTool',
+  props: {
+    todo: {
+      type: Object,
+      default: null
+    }
+  }
 }
 </script>
 
