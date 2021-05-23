@@ -1,7 +1,7 @@
 <template>
   <div class="content">
     <top-tool :todo="todo" />
-    <todo-item />
+    <todo-item :items="items" />
   </div>
 </template>
 
@@ -41,6 +41,7 @@ export default {
       getTodo({ id: ID }).then(res => {
         const { id, title, count, isDelete, isLock, item } = res.data.todo
         this.items = item
+        console.log(item)
         this.todo = {
           id: id,
           title: title,

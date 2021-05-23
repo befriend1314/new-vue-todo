@@ -1,14 +1,9 @@
 <template>
   <div class="todoItem">
     <ul class="itemList">
-      <li>
+      <li v-for="(item, index) in items" :key="index">
         <input type="checkbox">
-        <input class="valueBox" type="text" value="举头望明月低头思故乡">
-        <i class="icon iconfont icon-trash iconTrash"></i>
-      </li>
-      <li>
-        <input type="checkbox">
-        <input class="valueBox" type="text" value="举头望明月低头思故乡">
+        <input class="valueBox" type="text" v-model="item.text">
         <i class="icon iconfont icon-trash iconTrash"></i>
       </li>
     </ul>
@@ -17,7 +12,15 @@
 
 <script>
 export default {
-  name: 'TodoItem'
+  name: 'TodoItem',
+  props: {
+    items: {
+      type: Array,
+      default: function () {
+        return []
+      }
+    }
+  }
 }
 </script>
 
